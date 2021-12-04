@@ -1,0 +1,44 @@
+import java.util.*;
+public class Main {
+   static int total;
+   
+    public static void main (String args[]) {
+Scanner s=new Scanner(System.in);
+int n=s.nextInt();
+int target=s.nextInt();
+int arr[]=new int[n];
+for(int i=0;i<n;i++){
+    arr[i]=s.nextInt();
+}
+System.out.println(findTargetSumWays(arr,target));
+    }
+
+   
+    public static int findTargetSumWays(int[] nums, int target) {
+            total = Arrays.stream(nums).sum();
+        int cashe[][]=new int[nums.length+1][2*total+1];
+        for(int[] arr:cashe){
+            Arrays.fill(arr,-1);
+        }
+            return callme(nums,target,0,0,cashe);
+    // return c;
+    }
+   static int callme(int nums[],int target,int sum,int i,int cashe[][]){
+        
+        if(i==nums.length){
+            if(sum==target)return 1;
+            return 0;
+            
+        }
+        if(cashe[i][sum+total]!=-1)
+            return cashe[i][sum+total];
+        
+            int a=callme(nums,target,sum+nums[i],i+1,cashe);
+            
+          int b=callme(nums,target,sum-nums[i],i+1,cashe);
+            
+        
+        return cashe[i][sum+total]=a+b;
+        
+    }}
+

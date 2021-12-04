@@ -1,0 +1,42 @@
+import java.util.*;
+public class Main {
+    public static void main (String args[]) {
+Scanner s=new Scanner(System.in);
+// int t=s.nextInt();
+// while(t-->0){
+	int n=s.nextInt();
+	int m=s.nextInt();
+int arr[][]=new int[n][m];
+for(int i=0;i<n;i++){
+for(int j=0;j<m;j++){
+arr[i][j]=s.nextInt();
+// System.out.println(arr[i][j]);
+}}
+int cashe[][]=new int[n+1][m+1];
+int max=Integer.MAX_VALUE;
+for(int[] arrr:cashe){
+	Arrays.fill(arrr,-1);
+}
+max=callme(arr,cashe,0,0);
+System.out.println(max);
+}
+ 
+	public static int callme(int arr[][],int cashe[][],int i,int j){
+if(i<0 || j>=arr[0].length || i>=arr.length)return Integer.MAX_VALUE;
+
+if(j==arr[0].length-1&& i==arr.length-1)
+return arr[i][j];
+
+if(cashe[i][j]!=-1){return cashe[i][j];}
+		// System.out.println("ayi");
+
+		int topright=callme(arr,cashe,i+1,j);
+		int right=callme(arr,cashe,i,j+1);
+		
+		// int downright=callme(arr,cashe,i-1,j+1);
+
+		// System.out.println("yeh h"+topright+" "+downright );
+return cashe[i][j]=Math.min(topright,right)+arr[i][j];
+
+	}
+}

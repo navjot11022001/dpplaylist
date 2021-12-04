@@ -1,0 +1,22 @@
+import java.util.*;
+public class Main {
+    public static void main (String args[]) {
+		Scanner s=new Scanner(System.in);
+int n=s.nextInt();
+long dp[]=new long[n+1];
+Arrays.fill(dp,-1);
+System.out.println(callme(0,dp,n));
+    }
+	static long callme(int sum,long dp[],int n){
+if(sum==n)return 1;
+if(sum>n)return 0;
+if(dp[sum]!=-1)return dp[sum];
+
+
+long one=callme(sum+1,dp,n);
+long two=callme(sum+3,dp,n);
+long three=callme(sum+4,dp,n);
+return dp[sum]=(one+two+three);
+
+	}
+}
