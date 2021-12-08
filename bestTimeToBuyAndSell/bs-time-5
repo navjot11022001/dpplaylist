@@ -1,0 +1,33 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+     int dp[][]=new int[prices.length+1][2];
+        for(int[] dpp:dp )
+        Arrays.fill(dpp,-1);
+        
+return bestTime(prices,0,1,dp);
+        
+    }
+    
+    
+    int bestTime(int []prices,int curr,int buy,int dp[][]){
+        
+        if(curr>=prices.length)return 0;//curr is increasing 2 times so you have to take care of that
+        if(dp[curr][buy]!=-1)return dp[curr][buy];
+        if(buy==1){
+            int buyKrlo=bestTime(prices,curr+1,0,dp)-prices[curr];
+                int mtBuyKro=bestTime(prices,curr+1,buy,dp);
+            
+        return dp[curr][buy]= Math.max(buyKrlo,mtBuyKro);
+        }
+        
+        else{
+            
+            int sellKro=bestTime(prices,curr+2,1,dp)+prices[curr]; //change og day that you cannot buy on the next day after selling
+            int sellMtKro=bestTime(prices,curr+1,0,dp);
+            return dp[curr][buy]=Math.max(sellKro,sellMtKro);
+                
+                
+        }
+    }    
+}
+// https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/submissions/

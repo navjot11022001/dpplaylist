@@ -1,0 +1,35 @@
+class Solution {
+    public int maxProfit(int k,int[] prices) {
+     int dp[][][]=new int[prices.length+1][2][k];
+        for(int[][] dpp:dp)
+          for(int[] kk:dpp )
+        Arrays.fill(kk,-1);
+        
+      return bestTime(prices,0,0,1,dp,k);
+           
+    }
+    
+    int bestTime(int []prices,int curr,int k,int buy,int dp[][][],int total){
+        
+        if(k==total || curr==prices.length)return 0;//only transictions are changed
+        if(dp[curr][buy][k]!=-1)return dp[curr][buy][k];
+        if(buy==1){
+            int buyKrlo=bestTime(prices,curr+1,k,0,dp,total)-prices[curr];
+                int mtBuyKro=bestTime(prices,curr+1,k,buy,dp,total);
+            
+        return dp[curr][buy][k]= Math.max(buyKrlo,mtBuyKro);
+        }
+        
+        else{
+            
+            int sellKro=bestTime(prices,curr+1,k+1,1,dp,total)+prices[curr];
+            int sellMtKro=bestTime(prices,curr+1,k,buy,dp,total);
+            return dp[curr][buy][k]=Math.max(sellKro,sellMtKro);
+                
+                
+        }
+        
+        }
+    
+}
+// https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/submissions/
